@@ -8,7 +8,6 @@
 ///////////////////////////////////////////////////////////////////////
 /// <reference path = "<%=typingFileName%>" />
 <%- request %>
-import useGlobalStore from "@/pages/globalStore";
 <%_ pathGroup.forEach((item) => { _%>
 <%_
   let { url, summary, bodyParamsType, responsesType, consumes, method, functionName } = item;
@@ -24,12 +23,8 @@ export async function <%=functionName%>(
 }> {
   // <%= url%>
   let _params: { [key: string]: any } = {
-    appid: useGlobalStore.getState().currentApp?.appid || '',
     ...params,
   };
-  return request(`<%=(basePath === '/' || basePath === '') ? '' : basePath%><%=url.replaceAll('\{', '${_params.')%>`, {
-    method: '<%=method.toUpperCase()%>',
-    <%=method.toUpperCase() === 'GET' ? 'params': 'data' %> : params,
-  });
+  return request.<%=method.toLowerCase()%>(`<%=(basePath === '/' || basePath === '') ? '' : basePath%><%=url.replaceAll('\{', '${_params.')%>`,  <%=method.toUpperCase() === 'GET' ? { params: _params } : {..._params} %>);
 }
 <%_ }) %>

@@ -1,5 +1,5 @@
 {
-  "name": "liquid-tools",
+  "name": "@lark-org/service-generator",
   "bin": {
     "liquid-tools": "bin/liquid-tools.js"
   },
